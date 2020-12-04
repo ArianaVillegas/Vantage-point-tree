@@ -27,7 +27,7 @@ class vptree {
 		node* n = new node();
 		n->idx = idx;
 		if(idx.size() == 1){
-			n->vp = 0;
+			n->vp = idx[0];
 			return n;
 		}
 		n->vp = idx[rand()%(idx.size())];
