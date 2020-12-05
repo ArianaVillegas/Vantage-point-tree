@@ -1,20 +1,25 @@
 #include "vptree.h"
 
+using namespace std;
+
 int main(){
 
-	srand(time(NULL));
+	metrics dimensions[100];
+	string type,file_source;
+	vector<record> data;
 
-	vector<record> data = {
-					{12},
-					{20},
-					{30},
-					{82},
-					{5}
-					};
+    fstream file("data.txt");
+    while(file>>file_source){
+        file>>type;
+        for(int i=0;i<100;i++){
+            file>>dimensions[i];
+        }
+        record temp (dimensions,type,file_source);
+        data.push_back(temp);
+        
+    }
+    vptree tree(data, &f);
 
-	vptree vt(data);
-
-    return 0;
+	return 0;
 }
-
 
