@@ -61,20 +61,11 @@ class vptree {
 		if(node->children[0] == nullptr && node->children[1] == nullptr)
 			return;
 
-		if(d <= node->umbral){
-			if(d - umbral <= node->umbral){
-				knnsearch(node->children[0], q, k, umbral, ans);
-			}
-			if(d + umbral >= node->umbral){
-				knnsearch(node->children[1], q, k, umbral, ans);
-			}
-		} else {
-			if(d - umbral <= node->umbral){
-				knnsearch(node->children[0], q, k, umbral, ans);
-			}
-			if(d + umbral >= node->umbral){
-				knnsearch(node->children[1], q, k, umbral, ans);
-			}
+		if(d - umbral <= node->umbral){
+			knnsearch(node->children[0], q, k, umbral, ans);
+		}
+		if(d + umbral >= node->umbral){
+			knnsearch(node->children[1], q, k, umbral, ans);
 		}
 	}
 
@@ -95,7 +86,7 @@ public:
 	vector<record> knnsearch(record query, int k){
 		vector<record> ans;
 		priority_queue<pair<metrics,int>> pq;
-		metrics rq = 1e9;
+		metrics rq = 1e32;
 		knnsearch(root, query, k, rq, pq);
 		while(!pq.empty()){
 			auto it = pq.top();
