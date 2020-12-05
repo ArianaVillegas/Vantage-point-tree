@@ -20,21 +20,30 @@ int main(){
 
     vptree tree(data, &f);
 
+    // TEST ------------------------------------------------------
+
     fstream test("input.txt");
+	int rep = 0;
+	int num = 0;
+	double t = 0;
     while(test>>file_source){
     	test>>type;
     	for(int i=0;i<100;i++){
             test>>dimensions[i];
         }
         record temp (dimensions,type,file_source);
-        auto ans = tree.knnsearch(temp, 5);
-        cout << "Tipo del query: " << type << '\n';
-        cout << "Tipo de respuestas\n";
+        clock_t start = clock();
+        auto ans = tree.knnsearch(temp, 1);
+        clock_t end = clock();
+        t += double(end-start)/CLOCKS_PER_SEC;
         for(auto it:ans){
-        	cout << it.type << '\n';
+        	if(type == it.type) rep++;
         }
-        cout << "\n\n\n";
+        num++;
     }
+    cout << "Predicción correcta: " << rep*1.0/num*100 << '\n';
+    cout << "Predicción incorrecta: " << (1-rep*1.0/num)*100 << '\n';
+    cout << "Tiempo promedio (s): " << t/num << '\n';
 
 
 	return 0;
